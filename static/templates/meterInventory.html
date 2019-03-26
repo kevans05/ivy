@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="jumbotron">
+            <div id="accordion" role="tablist" aria-multiselectable="true">
+              <div class="card">
+                <div class="card-header" role="tab" id="headingOne">
+                  <h5 class="mb-0">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="addToInventory">
+                      Add a new meter to the Inventory
+                    </a>
+                  </h5>
+                </div>
+
+                <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne" style="background:#e9ecef">
+                  <div class="card-block">
+                      <div class="jumbotron">
+                        <form action="{{ url_for('handleMeterInventory') }}" method="post">
+                            <div class="form-group">
+                                <p>
+                                    <label for="brandName">Brand Name</label>
+                                    <input type="text"  id="brandName" name="brandName">
+                                </p>
+                                <p>
+                                    <label for="modelName">Model Name:</label>
+                                    <input type="text" id="modelName" name="modelName">
+                                </p>
+                                <p>
+                                    <label for="serialNumber">Please eneter the Serial Numbers for the devices you
+                                        would like to add to the inventory (if adding multiple please ; between each serial number):</label>
+                                    <textarea class="form-control" id="serialNumber" rows="3" name="serialNumber"></textarea>
+                                </p>
+                                <p>
+                                    <button type="submit" class="btn btn-primary" style="width: 100%">Submit</button>
+                                </p>
+                            </div>
+                        </form>
+                      </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header" role="tab" id="headingTwo">
+                  <h5 class="mb-0">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                      Manage the Existing Inventory
+                    </a>
+                  </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" style="background:#e9ecef">
+                  <div class="card-block">
+                  <div class="jumbotron">
+                        <form action="{{ url_for('handleMeterRequest') }}" method="post">
+                            <div class="form-group">
+                                <table style="width: 100%">
+                                  <tr>
+                                    <th>Meter Brand</th>
+                                    <th>Meter Model </th>
+                                    <th>Serial Number</th>
+                                    <th>Nickname</th>
+                                    <th>Status</th>
+                                  </tr>
+                                  <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <input type="text" id="modelName" name="modelName">
+                                    </td>
+                                    <td>
+                                        <select class="form-control" id="statusSelect">
+                                          <option>1</option>
+                                        </select>
+                                    </td>
+                                  </tr>
+                                </table>
+                            </div>
+                        </form>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
