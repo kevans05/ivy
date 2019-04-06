@@ -57,22 +57,20 @@
                                     <th>Meter Brand</th>
                                     <th>Meter Model </th>
                                     <th>Serial Number</th>
-                                    <th>Nickname</th>
                                     <th>Status</th>
                                   </tr>
+                                {% for o in meters %}
                                   <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>
-                                        <input type="text" id="modelName" name="modelName">
-                                    </td>
+                                    <td>{{ o.brandName }}</td>
+                                    <td>{{ o.modelName }}</td>
+                                    <td>{{ o.serialNumber }}</td>
                                     <td>
                                         <select class="form-control" id="statusSelect">
                                           <option>1</option>
                                         </select>
                                     </td>
                                   </tr>
+                                {% endfor %}
                                 </table>
                             </div>
                         </form>

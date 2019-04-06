@@ -15,6 +15,8 @@ def index():
 
 @app.route('/meter-request')
 def meterRequest():
+    db = dataset.connect('sqlite:///database.db')
+    table = db['meterInventory']
     return render_template('meterRequest.html')
 
 @app.route('/handle-meter-request', methods=['POST'])
@@ -24,7 +26,9 @@ def handleMeterRequest():
         meterRequest = request.form.to_dict(flat=False)
         db = dataset.connect('sqlite:///database.db')
         table = db['requestTable']
+        #db['meterInventory']
         meterRequestDict = {}
+
         for key, values in meterRequest.items():
             x = ';'.join(values)
             meterRequestDict.update({key: x})
@@ -33,16 +37,19 @@ def handleMeterRequest():
             installationDate={'<=':datetime.datetime.strptime(meterRequestDict['installationDate'], "%Y-%m-%d") - datetime.timedelta(days=1)},
             removalDate={'>=':datetime.datetime.strptime(meterRequestDict['removalDate'], "%Y-%m-%d")  + datetime.timedelta(days=1)})
         table.insert(meterRequestDict)
+
         x = 0
         for row in futureAppointments:
             x = x + int(row['qntDentElietPro'])
-            if x >= 10:
+            if x >= len(db['meterInventory']):
                 print("failed attempt")
     return redirect('/')
 
 @app.route('/meter-inventory')
 def meterInventory():
-    return render_template('meterInventory.html')
+    db = dataset.connect('sqlite:///database.db')
+    table = db['meterInventory']
+    return render_template('meterInventory.html',meters=table)
 
 @app.route('/handle-meter-inventory' , methods=['POST'])
 def handleMeterInventory():
