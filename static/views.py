@@ -1,11 +1,8 @@
 from static import app
 
 from flask import render_template, redirect, request, flash
-from werkzeug.utils import secure_filename
 
 import os
-
-import dataset, datetime
 
 
 ALLOWED_EXTENSIONS = set(['pdf'])
@@ -18,30 +15,14 @@ def allowed_file(filename):
 def index():
     return render_template('index.html',title='Home')
 
-@app.route('/add-a-meter')
+@app.route('/add-a-meter', methods=['POST', 'GET'])
 def add_a_meter():
-    return render_template('addMeter.html')
-
-@app.route('/handle-adding-meter', methods=['POST'])
-def handle_adding_a_meter():
-    print("Error 1")
     if request.method == 'POST':
-        print("Error 2")
-        if 'file' not in request.files:
-            print("Error 3")
-            flash('No file part')
-            return redirect(request.url)
-        file = request.files['file']
-        if file.filename == '':
-            print("Error 4")
-            flash('No file selected for uploading')
-            return redirect(request.url)
-        if file and allowed_file(file.filename):
-            print("Error 5")
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            flash('File(s) successfully uploaded')
-            return redirect('/')
+        for key, f in request.files.items():
+            if key.startswith('file'):
+                f.save(os.path.join(app.config['UPLOADED_PATH'], f.filename))
+    return render_template('add_a_meter.html')
+
 
 
 

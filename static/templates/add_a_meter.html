@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="jumbotron">
+            <legend>Add a Meter to the Inventory</legend>
+            {{ dropzone.create(action='add_a_meter') }}
+            {{ dropzone.load_js() }}
+            {{ dropzone.config() }}
+
+{#             <form action="{{ url_for('handle_adding_a_meter') }}" method="post" enctype="multipart/form-data">#}
+{#                            <div class="form-group">#}
+{#                                <p>#}
+{#                                    <label for="brandName">Brand Name</label>#}
+{#                                    <input type="text" id="brandName" name="brandName">#}
+{#                                </p>#}
+{#                                <p>#}
+{#                                    <label for="category">Category</label>#}
+{#                                    <input type="text" id="category" name="category">#}
+{#                                </p>#}
+{#                                <p>#}
+{#                                </p>#}
+{#                                <!-- <p>#}
+{#                                    <label for="manual">Manual</label>#}
+{#                                    <input type = "file" id="manual" name="manual" />#}
+{#                                </p>#}
+{#                                <p>#}
+{#                                    <label for="calibrationCertificate">Calibration Certificate</label>#}
+{#                                    <input type = "file" id="calibrationCertificate" name="calibrationCertificate" />#}
+{#                                </p>-->#}
+{#                                <p>#}
+{#                                    <button type="submit" class="btn btn-primary">Submit</button>#}
+{#                                </p>#}
+{##}
+{#                            </div>#}
+{#            </form>#}
+        </div>
+    </div>
+
+{% endblock %}
