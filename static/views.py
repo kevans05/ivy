@@ -15,14 +15,28 @@ def allowed_file(filename):
 def index():
     return render_template('index.html',title='Home')
 
-@app.route('/add-a-meter', methods=['POST', 'GET'])
+@app.route('/add-a-meter')
 def add_a_meter():
-    if request.method == 'POST':
-        for key, f in request.files.items():
-            if key.startswith('file'):
-                f.save(os.path.join(app.config['UPLOADED_PATH'], f.filename))
     return render_template('add_a_meter.html')
 
+@app.route('/form_add_a_meter', methods=['POST'])
+def handle_form_add_a_meter():
+    filename = None
+    for key, f in request.files.items():
+        if key.startswith('file'):
+            f.save(os.path.join(app.config['UPLOADED_PATH'], f.filename))
+
+    print(key)
+    return render_template('index.html',title='Home')
+
+# @app.route('/form_add_a_meter', methods=['POST'])
+# def handle_form_add_a_meter():
+#     brandName = request.form.get('brandName')
+#     categoryHelp = request.form.get('categoryHelp')
+#     for key, f in request.files.get():
+#         print(key, f)
+#     return render_template('add_a_meter_return.html')
+    #return 'file uploaded and form submit<br>title: %s<br> description: %s' % (title, description)
 
 
 

@@ -1,38 +1,38 @@
 {% extends "base.html" %}
 {% block content %}
+    {{ dropzone.style('border: 2px dashed #0087F7; margin: 10px 0 10px; min-height: 100px; width: 100%') }}
     <div class="container-fluid">
         <div class="jumbotron">
             <legend>Add a Meter to the Inventory</legend>
-            {{ dropzone.create(action='add_a_meter') }}
+            <form action="{{ url_for('handle_form_add_a_meter') }}" enctype="multipart/form-data" method="post">
+                <p>
+                    <label for="brandName">What is the Brand of the meter:</label>
+                    <input type="text" class="form-control" id="brandName" name="brandName" placeholder="Fluke">
+                </p>
+                <p>
+                    <label for="category">What category does this meter belong to:</label>
+                    <input type="text" class="form-control" id="category" name="category" placeholder="Power Meter">
+                    <small id="categoryHelp" class="form-text text-muted">If this meter fits into more then one category
+                        separate the types with a ;</small>
+                </p>
+                <p>
+                    <label for="serialNumbers">What are the serial number(s) of the meter</label>
+                    <textarea class="form-control" id="serialNumbers" rows="3"></textarea>
+                     <small id="serialNumbersHelp" class="form-text text-muted">If there are multiple meters please
+                        separate the names with a ;</small>
+                </p>
+
+                <hr class="my-4">
+                <p>
+                    {{ dropzone.create() }}
+                    <small id="documentationHelp" class="form-text text-muted">Documentation includes, Sell Sheets,
+                        Spec Sheets, Manuals, Calibration Documents, etc</small>
+                </p>
+                <button type="submit" id="submit" class="btn btn-primary">Submit and Upload</button>
+            </form>
+
             {{ dropzone.load_js() }}
             {{ dropzone.config() }}
-
-{#             <form action="{{ url_for('handle_adding_a_meter') }}" method="post" enctype="multipart/form-data">#}
-{#                            <div class="form-group">#}
-{#                                <p>#}
-{#                                    <label for="brandName">Brand Name</label>#}
-{#                                    <input type="text" id="brandName" name="brandName">#}
-{#                                </p>#}
-{#                                <p>#}
-{#                                    <label for="category">Category</label>#}
-{#                                    <input type="text" id="category" name="category">#}
-{#                                </p>#}
-{#                                <p>#}
-{#                                </p>#}
-{#                                <!-- <p>#}
-{#                                    <label for="manual">Manual</label>#}
-{#                                    <input type = "file" id="manual" name="manual" />#}
-{#                                </p>#}
-{#                                <p>#}
-{#                                    <label for="calibrationCertificate">Calibration Certificate</label>#}
-{#                                    <input type = "file" id="calibrationCertificate" name="calibrationCertificate" />#}
-{#                                </p>-->#}
-{#                                <p>#}
-{#                                    <button type="submit" class="btn btn-primary">Submit</button>#}
-{#                                </p>#}
-{##}
-{#                            </div>#}
-{#            </form>#}
         </div>
     </div>
 
