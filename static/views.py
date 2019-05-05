@@ -19,15 +19,21 @@ def index():
 def add_a_meter():
     return render_template('add_a_meter.html')
 
-@app.route('/form_add_a_meter', methods=['POST'])
-def handle_form_add_a_meter():
-    filename = None
+@app.route('/upload_add_a_meter', methods=['POST'])
+def upload_add_a_meter():
     for key, f in request.files.items():
         if key.startswith('file'):
             f.save(os.path.join(app.config['UPLOADED_PATH'], f.filename))
+    return '', 204
 
-    print(key)
-    return render_template('index.html',title='Home')
+@app.route('/form_add_a_meter', methods=['POST'])
+def form_add_a_meter():
+    print(request.form.keys)
+    return 'file uploaded'
+
+
+
+
 
 # @app.route('/form_add_a_meter', methods=['POST'])
 # def handle_form_add_a_meter():
@@ -37,11 +43,6 @@ def handle_form_add_a_meter():
 #         print(key, f)
 #     return render_template('add_a_meter_return.html')
     #return 'file uploaded and form submit<br>title: %s<br> description: %s' % (title, description)
-
-
-
-
-
 # @app.route('/handle-meter-request', methods=['POST'])
 # def handleMeterRequest():
 #     jobID = int(time()*sin(3))

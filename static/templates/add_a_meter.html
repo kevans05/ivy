@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="jumbotron">
             <legend>Add a Meter to the Inventory</legend>
-            <form action="{{ url_for('handle_form_add_a_meter') }}" enctype="multipart/form-data" method="post">
+            <form action="{{ url_for('form_add_a_meter') }}" method="post">
                 <p>
                     <label for="brandName">What is the Brand of the meter:</label>
                     <input type="text" class="form-control" id="brandName" name="brandName" placeholder="Fluke">
